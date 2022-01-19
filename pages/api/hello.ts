@@ -9,5 +9,6 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+    console.error("---- pages/api handler!!")
   res.status(200).json({ name: 'John Doe' })
 }
