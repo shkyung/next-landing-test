@@ -45,3 +45,10 @@ button {
   cursor: pointer;
   font-size: 0.85em;
 }
+#header {
+  width: 100%;
+  position: fixed;
+  height: 50px;
+  top: 0;
+  z-index: 99;
+}

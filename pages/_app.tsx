@@ -6,7 +6,7 @@ function MyApp({Component, pageProps}: AppProps) {
     console.error("_app rendering!!")
     return (
         <>
-            {/*<Header/>*/}
+            <Header/>
             <Component {...pageProps} />
         </>
     )

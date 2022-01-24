@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Header = () => {
     return (
-        <div>
+        <div id={"header"}>
             <Link href="/">
                 <a>Home</a>
             </Link>
