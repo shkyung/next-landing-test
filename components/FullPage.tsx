@@ -9,6 +9,7 @@ const Fullpage = () => {
     const afterLoad = (origin: any, destination: { index: string; }, direction: any) => {
         console.log("After load: " + destination.index);
     }
+    const anchors = ["home", "features", "gallery", "news"]
     return (
         <ReactFullpage
             //fullpage options
@@ -16,6 +17,9 @@ const Fullpage = () => {
             render={({state, fullpageApi}) => {
                 return (
                     <ReactFullpage
+                        anchors={anchors}
+                        navigation
+                        navigationTooltips={anchors}
                         scrollOverflow={true}
                         sectionsColor={["orange", "purple", "green"]}
                         onLeave={(origin, destination, direction) => {
