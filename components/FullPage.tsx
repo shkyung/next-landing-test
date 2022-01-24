@@ -9,6 +9,7 @@ const Fullpage = () => {
     const afterLoad = (origin: any, destination: { index: string; }, direction: any) => {
         console.log("After load: " + destination.index);
     }
+    const anchors = ["home", "features", "gallery", "news"]
     return (
         <ReactFullpage
             //fullpage options
@@ -16,8 +17,11 @@ const Fullpage = () => {
             render={({state, fullpageApi}) => {
                 return (
                     <ReactFullpage
+                        anchors={anchors}
+                        navigation
+                        navigationTooltips={anchors}
                         scrollOverflow={true}
-                        sectionsColor={["orange", "purple", "green"]}
+                        sectionsColor={["orange", "purple", "green", "blue"]}
                         onLeave={(origin, destination, direction) => {
                             console.log("onLeave event", { origin, destination, direction });
                         }}
@@ -28,11 +32,11 @@ const Fullpage = () => {
                             return (
                                 <div id="fullpage-wrapper">
                                     <div className="section section1">
-                                        <h3>Section 1</h3>
+                                        <h3>Home</h3>
                                     </div>
                                     <div className="section">
                                         <div className="slide">
-                                            <h3>Slide 2.1</h3>
+                                            <h3>features</h3>
                                         </div>
                                         <div className="slide">
                                             <h3>Slide 2.2</h3>
@@ -41,8 +45,11 @@ const Fullpage = () => {
                                             <h3>Slide 2.3</h3>
                                         </div>
                                     </div>
+                                    <div className="section">
+                                        <h3>gallery</h3>
+                                    </div>
                                     <div className="section active">
-                                        <h3>Section 3</h3>
+                                        <h3>news</h3>
                                         <button onClick={() => fullpageApi.moveTo(1, 0)}>
                                             Move top
                                         </button>

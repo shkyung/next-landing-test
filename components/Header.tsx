@@ -1,20 +1,25 @@
-import Link from "next/link";
+declare const window: any;
 
 const Header = () => {
+    const moveSection = (target: number) => {
+        window.fullpage_api.moveTo(target, 0)
+    }
     return (
         <div id={"header"}>
-            <Link href="/">
-                <a>Home</a>
-            </Link>
-            <Link href="/features">
-                <a>Features</a>
-            </Link>
-            <Link href="/gallery">
-                <a>Gallery</a>
-            </Link>
-            <Link href="/news">
-                <a>News</a>
-            </Link>
+            <ul className={'nav'}>
+                <li>
+                    <a href="#home" onClick={() => moveSection(1)}>Home</a>
+                </li>
+                <li>
+                    <a href="#features" onClick={() => moveSection(2)}>Features</a>
+                </li>
+                <li>
+                    <a href="#gallery" onClick={() => moveSection(3)}>Gallery</a>
+                </li>
+                <li>
+                    <a href="#news" onClick={() => moveSection(4)}>News</a>
+                </li>
+            </ul>
         </div>
     )
 }
