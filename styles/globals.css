@@ -62,3 +62,7 @@ button {
 /*  font-size: 16px;*/
 /*  text-decoration: none;*/
 /*}*/
+
+.fp-controlArrow {
+  display: none;
+}

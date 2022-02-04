@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
-//import "fullpage.js/vendors/scrolloverflow";
 
 const Fullpage = () => {
+    console.error("---FullPage render!!")
     const onLeave = (origin: { index: string; }, destination: any, direction: any) => {
         console.log("Leaving section " + origin.index);
     }
@@ -17,42 +17,59 @@ const Fullpage = () => {
             render={({state, fullpageApi}) => {
                 return (
                     <ReactFullpage
-                        anchors={anchors}
+                        //anchors={anchors}
                         navigation
-                        navigationTooltips={anchors}
+                        //navigationTooltips={anchors}
                         scrollOverflow={true}
-                        sectionsColor={["orange", "purple", "green", "blue"]}
+                        sectionsColor={["orange", "purple", "green", "blue", "red", "grey"]}
                         onLeave={(origin, destination, direction) => {
-                            console.log("onLeave event", { origin, destination, direction });
+                            console.error("onLeave event", { origin, destination, direction });
                         }}
                         afterLoad={(origin, destination, direction) => {
-                            console.log("afterLoad event", { origin, destination, direction });
+                            console.error("afterLoad event", { origin, destination, direction });
                         }}
+                        debug={process.env.NODE_ENV === 'development'}
                         render={({state, fullpageApi}) => {
                             return (
                                 <div id="fullpage-wrapper">
-                                    <div className="section section1">
+                                    <div className="section section1 active">
                                         <h3>Home</h3>
                                     </div>
-                                    <div className="section">
+                                    <div className="section section2">
                                         <div className="slide">
-                                            <h3>features</h3>
+                                            <h3>Feature #1 - Light</h3>
+                                            <button onClick={() => fullpageApi.moveSlideRight()}>go to dark side</button>
                                         </div>
                                         <div className="slide">
-                                            <h3>Slide 2.2</h3>
-                                        </div>
-                                        <div className="slide">
-                                            <h3>Slide 2.3</h3>
+                                            <h3>Feature #1 - Dark</h3>
+                                            <button onClick={() => fullpageApi.moveSlideLeft()}>go to light side</button>
                                         </div>
                                     </div>
-                                    <div className="section">
-                                        <h3>gallery</h3>
+                                    <div className="section section3">
+                                        <div className="slide">
+                                            <h3>Feature #2 - Light</h3>
+                                            <button onClick={() => fullpageApi.moveSlideRight()}>go to dark side</button>
+                                        </div>
+                                        <div className="slide">
+                                            <h3>Feature #2 - Dark</h3>
+                                            <button onClick={() => fullpageApi.moveSlideLeft()}>go to light side</button>
+                                        </div>
                                     </div>
-                                    <div className="section active">
-                                        <h3>news</h3>
-                                        <button onClick={() => fullpageApi.moveTo(1, 0)}>
-                                            Move top
-                                        </button>
+                                    <div className="section section4">
+                                        <div className="slide">
+                                            <h3>Feature #3 - Light</h3>
+                                            <button onClick={() => fullpageApi.moveSlideRight()}>go to dark side</button>
+                                        </div>
+                                        <div className="slide">
+                                            <h3>Feature #3 - Dark</h3>
+                                            <button onClick={() => fullpageApi.moveSlideLeft()}>go to light side</button>
+                                        </div>
+                                    </div>
+                                    <div className="section section5">
+                                        <h3>Gallery</h3>
+                                    </div>
+                                    <div className="section section6">
+                                        <h3>News</h3>
                                     </div>
                                 </div>
                             );
