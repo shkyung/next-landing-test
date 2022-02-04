@@ -8,16 +8,16 @@ const Header = () => {
         <div id={"header"}>
             <ul className={'nav'}>
                 <li>
-                    <a href="#home" onClick={() => moveSection(1)}>Home</a>
+                    <a onClick={() => moveSection(1)}>Home</a>
                 </li>
                 <li>
-                    <a href="#features" onClick={() => moveSection(2)}>Features</a>
+                    <a onClick={() => moveSection(2)}>Features</a>
                 </li>
                 <li>
-                    <a href="#gallery" onClick={() => moveSection(3)}>Gallery</a>
+                    <a onClick={() => moveSection(5)}>Gallery</a>
                 </li>
                 <li>
-                    <a href="#news" onClick={() => moveSection(4)}>News</a>
+                    <a onClick={() => moveSection(6)}>News</a>
                 </li>
             </ul>
         </div>
