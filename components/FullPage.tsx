@@ -37,31 +37,31 @@ const Fullpage = () => {
                                     <div className="section section2">
                                         <div className="slide">
                                             <h3>Feature #1 - Light</h3>
-                                            <button>go to dark side</button>
+                                            <button onClick={() => fullpageApi.moveTo(2,1)}>go to dark side</button>
                                         </div>
                                         <div className="slide">
                                             <h3>Feature #1 - Dark</h3>
-                                            <button>go to light side</button>
+                                            <button onClick={() => fullpageApi.moveTo(2,0)}>go to light side</button>
                                         </div>
                                     </div>
                                     <div className="section section3">
                                         <div className="slide">
                                             <h3>Feature #2 - Light</h3>
-                                            <button>go to dark side</button>
+                                            <button onClick={() => fullpageApi.moveTo(3,1)}>go to dark side</button>
                                         </div>
                                         <div className="slide">
                                             <h3>Feature #2 - Dark</h3>
-                                            <button>go to light side</button>
+                                            <button onClick={() => fullpageApi.moveTo(3,0)}>go to light side</button>
                                         </div>
                                     </div>
                                     <div className="section section4">
                                         <div className="slide">
                                             <h3>Feature #3 - Light</h3>
-                                            <button>go to dark side</button>
+                                            <button onClick={() => fullpageApi.moveTo(4,1)}>go to dark side</button>
                                         </div>
                                         <div className="slide">
                                             <h3>Feature #3 - Dark</h3>
-                                            <button>go to light side</button>
+                                            <button onClick={() => fullpageApi.moveTo(4,0)}>go to light side</button>
                                         </div>
                                     </div>
                                     <div className="section section5">
