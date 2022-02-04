@@ -31,28 +31,36 @@ const Fullpage = () => {
                         render={({state, fullpageApi}) => {
                             return (
                                 <div id="fullpage-wrapper">
-                                    <div className="section section1">
+                                    <div className="section section1 active">
                                         <h3>Home</h3>
                                     </div>
                                     <div className="section">
                                         <div className="slide">
-                                            <h3>features</h3>
+                                            <h3>Feature #1 - Light</h3>
                                         </div>
                                         <div className="slide">
-                                            <h3>Slide 2.2</h3>
-                                        </div>
-                                        <div className="slide">
-                                            <h3>Slide 2.3</h3>
+                                            <h3>Feature #1 - Dark</h3>
                                         </div>
                                     </div>
                                     <div className="section">
-                                        <h3>gallery</h3>
+                                        <div className="slide">
+                                            <h3>Feature #2 - Light</h3>
+                                        </div>
+                                        <div className="slide">
+                                            <h3>Feature #2 - Dark</h3>
+                                        </div>
                                     </div>
-                                    <div className="section active">
-                                        <h3>news</h3>
-                                        <button onClick={() => fullpageApi.moveTo(1, 0)}>
-                                            Move top
-                                        </button>
+                                    <div className="section">
+                                        {/*<h3>news</h3>*/}
+                                        {/*<button onClick={() => fullpageApi.moveTo(1, 0)}>*/}
+                                        {/*    Move top*/}
+                                        {/*</button>*/}
+                                        <div className="slide">
+                                            <h3>Feature #2 - Light</h3>
+                                        </div>
+                                        <div className="slide">
+                                            <h3>Feature #2 - Dark</h3>
+                                        </div>
                                     </div>
                                 </div>
                             );
