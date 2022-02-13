@@ -2,6 +2,7 @@ import type {NextPage} from 'next'
 import styles from '../styles/Home.module.css'
 import Head from "next/head";
 import FullPage from "components/FullPage";
+import Canvas from "../components/Canvs";
 
 const Home: NextPage = () => {
     return (
@@ -12,6 +13,7 @@ const Home: NextPage = () => {
             {/*    <link rel="icon" href="/favicon.ico" />*/}
             {/*</Head>*/}
             <FullPage/>
+            {process.browser ? <Canvas/> : null}
         </div>
     )
 }

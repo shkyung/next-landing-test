@@ -15,6 +15,7 @@ const Fullpage = () => {
             //fullpage options
             licenseKey={'YOUR_KEY_HERE'}
             render={({state, fullpageApi}) => {
+                console.error("----여기 FUllpage render")
                 return (
                     <ReactFullpage
                         //anchors={anchors}
@@ -28,7 +29,7 @@ const Fullpage = () => {
                         afterLoad={(origin, destination, direction) => {
                             console.error("afterLoad event", { origin, destination, direction });
                         }}
-                        debug={process.env.NODE_ENV === 'development'}
+                        // debug={process.env.NODE_ENV === 'development'}
                         render={({state, fullpageApi}) => {
                             return (
                                 <div id="fullpage-wrapper">
