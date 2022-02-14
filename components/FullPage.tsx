@@ -1,84 +1,150 @@
-import React from 'react';
-import ReactFullpage from '@fullpage/react-fullpage';
+import React, {useState, useEffect} from 'react';
+import ReactFullpage, {Item} from '@fullpage/react-fullpage';
 
-const Fullpage = () => {
-    console.error("---FullPage render!!")
-    const onLeave = (origin: { index: string; }, destination: any, direction: any) => {
-        console.log("Leaving section " + origin.index);
+const FullPage = () => {
+    const style = {
+        //  color: "red"
     }
-    const afterLoad = (origin: any, destination: { index: string; }, direction: any) => {
-        console.log("After load: " + destination.index);
+
+    const afterLoad = (origin: Item, destination: Item, direction: string) => {
+        const {index} = destination
+        // @ts-ignore
+        document.getElementById("fp-nav").style.visibility = index === 0 ? "hidden" : "visible"
+        console.error("afterLoad event", {origin, destination, direction});
     }
-    const anchors = ["home", "features", "gallery", "news"]
+
+    const afterSlideLoad = (section: Item, origin: Item, destination: Item, direction: string) => {
+        console.error("----afterSlideLoad", {section, origin, destination, direction})
+    }
+
     return (
         <ReactFullpage
-            //fullpage options
-            licenseKey={'YOUR_KEY_HERE'}
+            css3={false}
+            navigation
+            scrollOverflow={true}
+            afterLoad={afterLoad}
+            afterSlideLoad={afterSlideLoad}
             render={({state, fullpageApi}) => {
-                console.error("----여기 FUllpage render")
+                const index = state?.destination?.index
+
+                const getDisplayInfo = (): {sectionIndex: number, isDarkMode: boolean}  | undefined  => {
+                    const lastEvent = state.lastEvent
+                    const destinationItem = state.destination?.item
+
+                    if (lastEvent === "afterLoad") {
+                        const slidesEl = state.destination.item.querySelector(".fp-slides")
+
+                        if (slidesEl) {
+                            const activeSlideEl = slidesEl.querySelector(".active")
+                            const sectionIndex = Number(activeSlideEl.getAttribute("data-index"))
+                            const isDarkMode = activeSlideEl.classList.contains("dark")
+                            return {
+                                sectionIndex,
+                                isDarkMode
+                            }
+                        }
+                    } else if (lastEvent === 'afterSlideLoad') {
+                        const sectionIndex = Number(destinationItem.getAttribute("data-index"))
+                        const isDarkMode = destinationItem.classList.contains("dark")
+                        return {
+                            sectionIndex,
+                            isDarkMode
+                        }
+                    }
+                }
+
+                const displayInfo = getDisplayInfo()
+
+                if(typeof window !== "undefined") {
+                    const customEvent = new window.CustomEvent('customEvent', {
+                        detail: displayInfo
+                    })
+                    window.dispatchEvent(customEvent)
+                }
+
                 return (
-                    <ReactFullpage
-                        //anchors={anchors}
-                        navigation
-                        //navigationTooltips={anchors}
-                        scrollOverflow={true}
-                        sectionsColor={["orange", "purple", "green", "blue", "red", "grey"]}
-                        onLeave={(origin, destination, direction) => {
-                            console.error("onLeave event", { origin, destination, direction });
-                        }}
-                        afterLoad={(origin, destination, direction) => {
-                            console.error("afterLoad event", { origin, destination, direction });
-                        }}
-                        // debug={process.env.NODE_ENV === 'development'}
-                        render={({state, fullpageApi}) => {
-                            return (
-                                <div id="fullpage-wrapper">
-                                    <div className="section section1 active">
-                                        <h3>Home</h3>
-                                    </div>
-                                    <div className="section section2">
-                                        <div className="slide">
-                                            <h3>Feature #1 - Light</h3>
-                                            <button onClick={() => fullpageApi.moveSlideRight()}>go to dark side</button>
-                                        </div>
-                                        <div className="slide">
-                                            <h3>Feature #1 - Dark</h3>
-                                            <button onClick={() => fullpageApi.moveSlideLeft()}>go to light side</button>
-                                        </div>
-                                    </div>
-                                    <div className="section section3">
-                                        <div className="slide">
-                                            <h3>Feature #2 - Light</h3>
-                                            <button onClick={() => fullpageApi.moveSlideRight()}>go to dark side</button>
-                                        </div>
-                                        <div className="slide">
-                                            <h3>Feature #2 - Dark</h3>
-                                            <button onClick={() => fullpageApi.moveSlideLeft()}>go to light side</button>
-                                        </div>
-                                    </div>
-                                    <div className="section section4">
-                                        <div className="slide">
-                                            <h3>Feature #3 - Light</h3>
-                                            <button onClick={() => fullpageApi.moveSlideRight()}>go to dark side</button>
-                                        </div>
-                                        <div className="slide">
-                                            <h3>Feature #3 - Dark</h3>
-                                            <button onClick={() => fullpageApi.moveSlideLeft()}>go to light side</button>
-                                        </div>
-                                    </div>
-                                    <div className="section section5">
-                                        <h3>Gallery</h3>
-                                    </div>
-                                    <div className="section section6">
-                                        <h3>News</h3>
-                                    </div>
+                    <div id="fullpage-wrapper">
+                        <div className="section" id="section1">
+                            <video id="myVideo" loop muted data-autoplay>
+                                <source src="flowers.mp4" type="video/mp4"/>
+                            </video>
+                            <div className="layer">
+                                <h1>Test</h1>
+                            </div>
+                        </div>
+                        <div className="section active" id="section2">
+                            <div className="slide light" data-index={1}>
+                                {/*<div className="overlay-slide">*/}
+                                <h2>111 - front</h2>
+                                <h2 style={style}>menu1 - test gltf load and animation version4 </h2>
+                                <button onClick={() => fullpageApi.moveSlideRight()}>go to back side
+                                </button>
+                            </div>
+                            <div className="slide dark" data-index={1}>
+                                <h2>111 - back</h2>
+                                <button onClick={() => fullpageApi.moveSlideLeft()}>go to front side
+                                </button>
+                            </div>
+                        </div>
+                        <div className="section" id="section3">
+                            <div className="slide light" data-index={2}>
+                                <div className="overlay-slide">
+                                    <h2>222 - front</h2>
+                                    <button onClick={() => fullpageApi.moveSlideRight()}>go to back side
+                                    </button>
+                                    <h2 style={style}>menu2 - test gltf load and animation version5 </h2>
                                 </div>
-                            );
-                        }}
-                    />
+                                {/*<div> {sectionIndex ===2 && !isDarkMode ? <Character5/> : null}</div>*/}
+                            </div>
+                            <div className="slide dark" data-index={2}>
+                                <h2>222 - back</h2>
+                                <button onClick={() => fullpageApi.moveSlideLeft()}>go to front side
+                                </button>
+                            </div>
+                        </div>
+                        <div className="section" id="section4">
+                            <div className="slide light" data-index={3}>
+                                <div className="overlay-slide">
+                                    <h2>333- front</h2>
+                                    <button onClick={() => fullpageApi.moveSlideRight()}>go to back side
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="slide dark" data-index={3}>
+                                <h2>333- back</h2>
+                                <button onClick={() => fullpageApi.moveSlideLeft()}>go to front side
+                                </button>
+                            </div>
+                        </div>
+                        <div className="section" id="section5">
+                            <div className="slide light" data-index={4}>
+                                <div className="overlay-slide">
+                                    <h2>444 - front</h2>
+                                    <button onClick={() => fullpageApi.moveSlideRight()}>go to back side
+                                    </button>
+                                    <h2 style={style}>test 파티클이미지 </h2>
+                                </div>
+                            </div>
+                            <div className="slide dark" data-index={4}>
+                                <h2>444 - back</h2>
+                                <button onClick={() => fullpageApi.moveSlideLeft()}>go to front side
+                                </button>
+                            </div>
+                        </div>
+                        <div className="section" id="section6">
+                            <h2>Single Page 2</h2>
+                        </div>
+                        <div className="section" id="section7">
+                            <h2>Single Page 3</h2>
+                        </div>
+                        <div className="section" id="section8">
+                            <h2>Single Page 4</h2>
+                        </div>
+                    </div>
                 );
             }}
-        />)
-};
+        />
+    )
+}
 
-export default Fullpage
+export default FullPage

@@ -1,5 +1,5 @@
 declare module '@fullpage/react-fullpage' {
-    type Item = {
+    export type Item = {
         anchor: string | number,
         index: number,
         item: HTMLElement,
